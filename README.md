@@ -1,3 +1,3 @@
-# Keygen
+# 🔑 Keygen
 
-A description of this package.
+A simple command line application for generating symmetric keys.

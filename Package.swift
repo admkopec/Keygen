@@ -5,22 +5,29 @@ import PackageDescription
 
 let package = Package(
     name: "Keygen",
+    platforms: [
+        .macOS(.v10_15),
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
+        .executable(
             name: "Keygen",
             targets: ["Keygen"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "0.4.3")),
+        .package(url: "https://github.com/apple/swift-crypto.git", .upToNextMajor(from: "1.0.0")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
+        .executableTarget(
             name: "Keygen",
-            dependencies: []),
+            dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Crypto", package: "swift-crypto"),
+            ]),
         .testTarget(
             name: "KeygenTests",
             dependencies: ["Keygen"]),
